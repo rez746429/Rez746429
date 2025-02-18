@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>3. Sınıf Yıl Sonu Ortalama Hesaplama by rez</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #007bff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #0056b3;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #003f7f;
+        }
+        #sonuc {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #sonuc span {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        #uyari {
+            font-size: 12px;
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>3. Sınıf Yıl Sonu Ortalama Hesaplama By Rez</h1>
+        <form id="notForm">
+            <label for="komite1">1. Komite (Enfeksiyon):</label>
+            <input type="number" id="komite1" name="komite1" min="0" max="100"><br>
+            <label for="komite2">2. Komite (Neoplazi):</label>
+            <input type="number" id="komite2" name="komite2" min="0" max="100"><br>
+            <label for="komite3">3. Komite (Dolaşım ve Solunum):</label>
+            <input type="number" id="komite3" name="komite3" min="0" max="100"><br>
+            <label for="komite4">4. Komite (Ürogenital Sistem):</label>
+            <input type="number" id="komite4" name="komite4" min="0" max="100"><br>
+            <label for="komite5">5. Komite (Kas ve İskelet):</label>
+            <input type="number" id="komite5" name="komite5" min="0" max="100"><br>
+            <label for="komite6">6. Komite (Gastrointestinal):</label>
+            <input type="number" id="komite6" name="komite6" min="0" max="100"><br>
+            <label for="komite7">7. Komite (Nörolojik Bilimler):</label>
+            <input type="number" id="komite7" name="komite7" min="0" max="100"><br>
+            <label for="komite8">8. Komite (Halk Sağlığı):</label>
+            <input type="number" id="komite8" name="komite8" min="0" max="100"><br>
+            <label for="final1">Final 1:</label>
+            <input type="number" id="final1" name="final1" min="0" max="100"><br>
+            <label for="final2">Final 2:</label>
+            <input type="number" id="final2" name="final2" min="0" max="100"><br>
+            <label for="ihu">İHU:</label>
+            <input type="number" id="ihu" name="ihu" min="0" max="100"><br>
+            <button type="button" onclick="hesapla()">Hesapla</button>
+        </form>
+        <p id="sonuc"></p>
+        <p id="uyari"></p>
+    </div>
+
+    <script>
+    function hesapla() {
+        let eksikNotVar = false;
+        const krediler = { komite1: 8, komite2: 6, komite3: 7, komite4: 7, komite5: 4, komite6: 9, komite7: 8, komite8: 7, final1: 28, final2: 28, ihu: 4 };
+        let toplamNot = 0, toplamKredi = 0;
+        
+        for (let key in krediler) {
+            let input = document.getElementById(key);
+            let not = parseFloat(input.value);
+            if (isNaN(not)) {
+                not = 0;
+                eksikNotVar = true;
+            }
+            toplamNot += not * krediler[key];
+            toplamKredi += krediler[key];
+        }
+        
+        let yilSonuOrtalamasi = toplamNot / toplamKredi;
+        let renk = yilSonuOrtalamasi >= 59.5 ? "green" : "red";
+        let mesaj = yilSonuOrtalamasi >= 59.5 ? "Tebrikler! " : "Üzgünüm :( ";
+        mesaj += `Yıl Sonu Ortalamanız: <span style='color:${renk}'>${yilSonuOrtalamasi.toFixed(2)}</span>`;
+        
+        document.getElementById('sonuc').innerHTML = mesaj;
+        document.getElementById('uyari').innerText = eksikNotVar ? "(Bazı notlarınızı girmediğiniz için sıfır olarak aldım)" : "";
+    }
+    </script>
+</body>
+</html>
