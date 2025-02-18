@@ -18,13 +18,14 @@
             padding: 20px;
         }
         .container {
-            background: white;
+            background: #333;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
             text-align: center;
+            color: white;
         }
         input {
             width: calc(100% - 20px);
@@ -57,6 +58,9 @@
             font-size: 12px;
             color: red;
             margin-top: 5px;
+        }
+        label {
+            color: white;
         }
     </style>
 </head>
@@ -115,7 +119,7 @@
         mesaj += `Yıl Sonu Ortalamanız: <span style='color:${renk}'>${yilSonuOrtalamasi.toFixed(2)}</span>`;
         
         document.getElementById('sonuc').innerHTML = mesaj;
-        document.getElementById('uyari').innerText = eksikNotVar ? "(Bazı notlarınızı girmediğiniz için onları sıfır olarak aldım)" : "";
+        document.getElementById('uyari').innerText = eksikNotVar ? "(Bazı notlarınızı girmediğiniz için sıfır olarak aldım)" : "";
     }
     </script>
 </body>
